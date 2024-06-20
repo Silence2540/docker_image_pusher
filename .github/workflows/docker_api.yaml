@@ -21,6 +21,10 @@ jobs:
   build:
     name: Pull
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     steps:
     - name: Print the input images to STDOUT
       run: echo The images are ${{ inputs.images }}
@@ -38,10 +42,9 @@ jobs:
         done
 
     - name: Commit and Push if changes were made
-      if: steps.append_images.outputs.changed == 'true'
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: stefanzweifel/git-auto-commit-action@v5.0.1
       with:
-        commit_message: 'Append images to images.txt'
+        commit_message: 'API: Append images to images.txt'
         file_pattern: images.txt
         
     # - name: Before freeing up disk space
