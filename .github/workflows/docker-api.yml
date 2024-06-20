@@ -6,7 +6,7 @@ on:
       images:
         description: 'images name list string for docker images push'
         required: true
-        type: string
+        type: list
   # push:
   #   branches: [ main ]
 
