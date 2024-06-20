@@ -22,8 +22,27 @@ jobs:
     name: Pull
     runs-on: ubuntu-latest
     steps:
-    - name: Print the input tag to STDOUT
+    - name: Print the input images to STDOUT
       run: echo The images are ${{ inputs.images }}
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Append images to images.txt
+      id: append_images
+      run: |
+        images="${{ github.event.inputs.images }}"
+        IFS=',' read -ra ADDR <<< "$images"
+        for i in "${ADDR[@]}"; do
+          echo "$i" >> images.txt
+        done
+
+    - name: Commit and Push if changes were made
+      if: steps.append_images.outputs.changed == 'true'
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: 'Append images to images.txt'
+        file_pattern: images.txt
         
     - name: Before freeing up disk space
       run: |
@@ -31,6 +50,7 @@ jobs:
         echo "=============================================================================="
         df -hT
         echo "=============================================================================="
+        exit 1
 
     # 增加可用磁盘空间
     - name: Maximize build space
