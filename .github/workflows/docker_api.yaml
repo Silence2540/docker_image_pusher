@@ -30,7 +30,7 @@ jobs:
       run: echo The images are ${{ inputs.images }}
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4.1.7
 
     - name: Append images to images.txt
       id: append_images
@@ -38,7 +38,9 @@ jobs:
         images="${{ github.event.inputs.images }}"
         IFS=',' read -ra ADDR <<< "$images"
         for i in "${ADDR[@]}"; do
-          echo "$i" >> images.txt
+          # 去除image名称前后的空白字符
+          trimmed_image=$(echo "$i" | xargs)
+          echo "$trimmed_image" >> images.txt
         done
 
     - name: Commit and Push if changes were made
