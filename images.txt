@@ -10,5 +10,6 @@
 # redis:6-alpine
 # postgres:15-alpine
 # semitechnologies/weaviate:1.19.0
-langgenius/dify-sandbox:0.2.1
-ubuntu/squid:latest
+# langgenius/dify-sandbox:0.2.1
+# ubuntu/squid:latest
+pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
