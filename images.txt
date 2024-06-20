@@ -21,3 +21,6 @@ hello-world:nanoserver1709
 hello-world:nanoserver
 hello-world:linux
 hello-world:nanoserver1709
+hello-world:latest
+alpine
+alpine:3
