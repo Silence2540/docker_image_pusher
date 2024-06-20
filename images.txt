@@ -16,3 +16,5 @@
 # pytorch/pytorch:2.2.2-cuda12.1-cudnn8-devel
 hello-world1
  hello-world2
+hello-world1
+hello-world2
