@@ -43,7 +43,7 @@ jobs:
           echo "$trimmed_image" >> images.txt
         done
 
-    - name: Commit and Push if changes were made
+    - name: Commit and Push with images
       uses: stefanzweifel/git-auto-commit-action@v5.0.1
       with:
         commit_message: 'API: Append images to images.txt'
@@ -186,3 +186,22 @@ jobs:
     #         echo "=============================================================================="     
             
     #     done < images.txt
+  
+    - name: Comment new images lines in images.txt
+      run: |
+        while IFS= read -r line; do
+          if [[ ! $line =~ ^# ]]; then
+            echo "# $line" >> images_temp.txt
+          else
+            echo "$line" >> images_temp.txt
+          fi
+        done < images.txt
+    
+        # 替换原始文件
+        mv images_temp.txt images.txt
+
+    - name: Commit and Push with commented images
+      uses: stefanzweifel/git-auto-commit-action@v5.0.1
+      with:
+        commit_message: 'API: Append images to images.txt'
+        file_pattern: images.txt
