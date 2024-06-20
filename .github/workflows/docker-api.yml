@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       images:
-        description: 'images name for docker images push'
+        description: 'images name list string for docker images push'
         required: true
-        type: list
+        type: string
   # push:
   #   branches: [ main ]
 
