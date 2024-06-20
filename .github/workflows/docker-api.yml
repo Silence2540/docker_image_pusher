@@ -18,11 +18,13 @@ env:
   ALIYUN_REGISTRY_PASSWORD: "${{ secrets.ALIYUN_REGISTRY_PASSWORD }}"
 
 jobs:
-
   build:
     name: Pull
     runs-on: ubuntu-latest
     steps:
+    - name: Print the input tag to STDOUT
+      run: echo The tags are ${{ inputs.tags }}
+        
     - name: Before freeing up disk space
       run: |
         echo "Before freeing up disk space"
