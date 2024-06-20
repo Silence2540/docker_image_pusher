@@ -174,6 +174,7 @@ jobs:
             docker tag $image $new_image
             echo "docker push $new_image"
             docker push $new_image
+            echo "docker push $new_image"
             echo "开始清理磁盘空间"
             echo "=============================================================================="
             df -hT
@@ -186,7 +187,10 @@ jobs:
             echo "=============================================================================="     
             
         done < images.txt
-  
+
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.7
+      
     - name: Comment new images lines in images.txt
       run: |
         while IFS= read -r line; do
