@@ -15,3 +15,6 @@
 # pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
 # pytorch/pytorch:2.2.2-cuda12.1-cudnn8-devel
 
+hello-world:nanoserver
+hello-world:linux
+hello-world:nanoserver1709
