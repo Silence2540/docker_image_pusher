@@ -188,6 +188,14 @@ jobs:
             
         done < images.txt
 
+        images="${{ github.event.inputs.images }}"
+        IFS=',' read -ra ADDR <<< "$images"
+        for i in "${ADDR[@]}"; do
+          # 去除image名称前后的空白字符
+          trimmed_image=$(echo "$i" | xargs)
+          echo "test $trimmed_image"
+        done
+
     - name: Checkout repository
       uses: actions/checkout@v4.1.7
       
