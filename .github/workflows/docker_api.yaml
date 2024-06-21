@@ -43,11 +43,11 @@ jobs:
           echo "$trimmed_image" >> images.txt
         done
 
-    - name: Commit and Push with images
-      uses: stefanzweifel/git-auto-commit-action@v5.0.1
-      with:
-        commit_message: 'API: Append images to images.txt'
-        file_pattern: images.txt
+    # - name: Commit and Push with images
+    #   uses: stefanzweifel/git-auto-commit-action@v5.0.1
+    #   with:
+    #     commit_message: 'API: Append images to images.txt'
+    #     file_pattern: images.txt
         
     - name: Before freeing up disk space
       run: |
@@ -185,8 +185,8 @@ jobs:
             
         done < images.txt
 
-    - name: Checkout repository
-      uses: actions/checkout@v4.1.7
+    # - name: Checkout repository
+    #   uses: actions/checkout@v4.1.7
       
     - name: Comment new images lines in images.txt
       run: |
@@ -205,3 +205,9 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v5.0.1
       with:
         commit_message: 'API: Comment images in images.txt'
+        # skip_dirty_check: true
+        # commit_options: '--no-verify --signoff'
+        file_pattern: '*.txt'
+        skip_fetch: false
+        skip_checkout: false
+        
