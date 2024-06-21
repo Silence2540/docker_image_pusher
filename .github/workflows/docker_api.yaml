@@ -216,4 +216,3 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v5.0.1
       with:
         commit_message: 'API: Comment images in images.txt'
-        file_pattern: images.txt
