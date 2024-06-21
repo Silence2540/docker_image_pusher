@@ -17,3 +17,4 @@
 hello-world:latest
 alpine
 alpine:3
+hello-world:latest
