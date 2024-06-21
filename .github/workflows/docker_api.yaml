@@ -26,12 +26,14 @@ jobs:
       # added or changed files to the repository.
       contents: write
     steps:
+    # 输出API参数的images
     - name: Print the input images to STDOUT
       run: echo The images are ${{ inputs.images }}
 
     - name: Checkout repository
       uses: actions/checkout@v4.1.7
 
+    # 添加API参数的images到images.txt
     - name: Append images to images.txt
       id: append_images
       run: |
@@ -43,12 +45,6 @@ jobs:
           echo "$trimmed_image" >> images.txt
         done
 
-    # - name: Commit and Push with images
-    #   uses: stefanzweifel/git-auto-commit-action@v5.0.1
-    #   with:
-    #     commit_message: 'API: Append images to images.txt'
-    #     file_pattern: images.txt
-        
     - name: Before freeing up disk space
       run: |
         echo "Before freeing up disk space"
@@ -126,7 +122,6 @@ jobs:
             fi       
         done < images.txt
         
-        
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
@@ -185,9 +180,7 @@ jobs:
             
         done < images.txt
 
-    # - name: Checkout repository
-    #   uses: actions/checkout@v4.1.7
-      
+    # 注释掉已push的new images
     - name: Comment new images lines in images.txt
       run: |
         while IFS= read -r line; do
@@ -201,6 +194,7 @@ jobs:
         # 替换原始文件
         mv images_temp.txt images.txt
 
+    # git push到repo
     - name: Commit and Push with commented images
       uses: stefanzweifel/git-auto-commit-action@v5.0.1
       with:
@@ -210,4 +204,3 @@ jobs:
         file_pattern: '*.txt'
         skip_fetch: false
         skip_checkout: false
-        
