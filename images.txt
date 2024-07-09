@@ -30,3 +30,4 @@
 # alpine
 # alpine
 # nvidia/cuda:11.8.0-devel-ubuntu22.04
+# nvidia/cuda:12.2.0-devel-ubuntu22.04
